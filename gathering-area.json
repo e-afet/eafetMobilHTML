@@ -1,0 +1,1418 @@
+[
+ 
+
+  {
+    "id": 74,
+    "coordinates": [28.62408, 41.16237],
+    "name": "Seyitonbaşı Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 75,
+    "coordinates": [28.61912, 41.16463],
+    "name": "Kazım Öztürk Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 76,
+    "coordinates": [28.62522, 41.15742],
+    "name": "Şakayık Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 77,
+    "coordinates": [28.61670, 41.16748],
+    "name": "Köroğlu Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 78,
+    "coordinates": [28.62861, 41.16257],
+    "name": "Şerife Bacı Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 79,
+    "coordinates": [28.62417, 41.16431],
+    "name": "Süleymaniye Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 80,
+    "coordinates": [28.60927, 41.18209],
+    "name": "Çerez Sokak Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 81,
+    "coordinates": [28.60568, 41.18406],
+    "name": "Şh. J. Astğm. Ali Yılmaz Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hadımköy"
+  },
+  {
+    "id": 82,
+    "coordinates": [28.71671, 41.20760],
+    "name": "M.F. Çakmak Trafik Eğitim Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mareşal Fevzi Çakmak"
+  },
+  {
+    "id": 83,
+    "coordinates": [28.72179, 41.19669],
+    "name": "Muhsin Yazıcıoğlu Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mareşal Fevzi Çakmak"
+  },
+  {
+    "id": 84,
+    "coordinates": [28.72145, 41.20312],
+    "name": "Akçay Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mareşal Fevzi Çakmak"
+  },
+  {
+    "id": 85,
+    "coordinates": [28.72987, 41.21305],
+    "name": "Eşref Bitlis Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mareşal Fevzi Çakmak"
+  },
+  {
+    "id": 86,
+    "coordinates": [28.72588, 41.19946],
+    "name": "Yahya Kemal Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mareşal Fevzi Çakmak"
+  },
+  {
+    "id": 87,
+    "coordinates": [28.68064, 41.30469],
+    "name": "Plevne Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Terkos"
+  },
+  {
+    "id": 88,
+    "coordinates": [28.68127, 41.30615],
+    "name": "Hanımeli Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Terkos"
+  },
+  {
+    "id": 89,
+    "coordinates": [28.67420, 41.30274],
+    "name": "Terkos-Karaburun Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Terkos"
+  },
+  {
+    "id": 90,
+    "coordinates": [28.67565, 41.30643],
+    "name": "Terkos Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Terkos"
+  },
+  {
+    "id": 91,
+    "coordinates": [28.67254, 41.15297],
+    "name": "Sazlıbosna Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Sazlıbosna"
+  },
+  {
+    "id": 92,
+    "coordinates": [28.70368, 41.22482],
+    "name": "Sultan Mehmet Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Fatih"
+  },
+  {
+    "id": 93,
+    "coordinates": [28.69202, 41.22363],
+    "name": "Hazerfen Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Fatih"
+  },
+  {
+    "id": 94,
+    "coordinates": [28.70208, 41.17919],
+    "name": "Şehit Er Savaş Koyun Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Haraççı"
+  },
+  {
+    "id": 95,
+    "coordinates": [28.70904, 41.17397],
+    "name": "Lalezar Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Haraççı"
+  },
+  {
+    "id": 96,
+    "coordinates": [28.70601, 41.18653],
+    "name": "Gardenya Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Haraççı"
+  },
+  {
+    "id": 97,
+    "coordinates": [28.70731, 41.18221],
+    "name": "Akşemsettin Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Haraççı"
+  },
+  {
+    "id": 98,
+    "coordinates": [28.70907, 41.17867],
+    "name": "Haraççı 1",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Haraççı"
+  },
+  {
+    "id": 99,
+    "coordinates": [28.71548, 41.20473],
+    "name": "Cumhuriyet Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mehmet Akif Ersoy"
+  },
+  {
+    "id": 100,
+    "coordinates": [28.70884, 41.20851],
+    "name": "Mehmet Akif 1",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mehmet Akif Ersoy"
+  },
+  {
+    "id": 101,
+    "coordinates": [28.71796, 41.31685],
+    "name": "Yeniköy Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yeniköy"
+  },
+  {
+    "id": 102,
+    "coordinates": [28.70446, 41.20848],
+    "name": "Hasan Polatkan Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Adnan Menderes"
+  },
+  {
+    "id": 103,
+    "coordinates": [28.61213, 41.31062],
+    "name": "Balaban Köy Meydanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Balaban"
+  },
+  {
+    "id": 104,
+    "coordinates": [28.61422, 41.31462],
+    "name": "Balaban Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Balaban"
+  },
+  {
+    "id": 105,
+    "coordinates": [28.76483, 41.19711],
+    "name": "Bolluca Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hicret"
+  },
+  {
+    "id": 106,
+    "coordinates": [28.75746, 41.19738],
+    "name": "Hicret Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hicret"
+  },
+  {
+    "id": 107,
+    "coordinates": [28.75503, 41.19820],
+    "name": "Hicret Camii",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hicret"
+  },
+  {
+    "id": 108,
+    "coordinates": [28.75570, 41.19654],
+    "name": "Siper Sokak Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Hicret"
+  },
+  {
+    "id": 109,
+    "coordinates": [28.72717, 41.20634],
+    "name": "Şehit Er İlyas Bozkır Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yavuz Selim"
+  },
+  {
+    "id": 110,
+    "coordinates": [28.73166, 41.20380],
+    "name": "Hoşseda Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yavuz Selim"
+  },
+  {
+    "id": 111,
+    "coordinates": [28.73214, 41.20864],
+    "name": "Orhangazi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yavuz Selim"
+  },
+  {
+    "id": 112,
+    "coordinates": [28.73956, 41.20358],
+    "name": "Osmangazi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yavuz Selim"
+  },
+  {
+    "id": 113,
+    "coordinates": [28.73568, 41.21160],
+    "name": "Şehit Polis İlhami Çetindere Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yavuz Selim"
+  },
+  {
+    "id": 114,
+    "coordinates": [28.73704, 41.20740],
+    "name": "Yavuzselim 1",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Yavuz Selim"
+  },
+  {
+    "id": 115,
+    "coordinates": [28.75342, 41.18521],
+    "name": "Aşık Veysel Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Anadolu"
+  },
+  {
+    "id": 116,
+    "coordinates": [28.74924, 41.18006],
+    "name": "Arnavutköy Semt Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Anadolu"
+  },
+  {
+    "id": 117,
+    "coordinates": [28.74660, 41.18310],
+    "name": "Engelliler Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Anadolu"
+  },
+  {
+    "id": 118,
+    "coordinates": [28.75201, 41.18649],
+    "name": "Şehit Er Sabahattin Akgül Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Anadolu"
+  },
+  {
+    "id": 119,
+    "coordinates": [28.76514, 41.19456],
+    "name": "Bolluca Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Atatürk"
+  },
+  {
+    "id": 120,
+    "coordinates": [28.76319, 41.18964],
+    "name": "Şirin Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Atatürk"
+  },
+  {
+    "id": 121,
+    "coordinates": [28.65438, 41.25908],
+    "name": "Baklalı Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Baklalı"
+  },
+  {
+    "id": 122,
+    "coordinates": [28.73455, 41.18955],
+    "name": "Açelya Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mustafa Kemal Paşa"
+  },
+  {
+    "id": 123,
+    "coordinates": [28.72543, 41.18992],
+    "name": "Vadipark",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mustafa Kemal Paşa"
+  },
+  {
+    "id": 124,
+    "coordinates": [28.73174, 41.19112],
+    "name": "Şehit Polis Bünyamin Bütün Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Mustafa Kemal Paşa"
+  },
+  {
+    "id": 125,
+    "coordinates": [28.69160, 41.33864],
+    "name": "Nevbahar Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Karaburun"
+  },
+  {
+    "id": 126,
+    "coordinates": [28.68157, 41.34637],
+    "name": "Erguvan Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Karaburun"
+  },
+  {
+    "id": 127,
+    "coordinates": [28.62845, 41.26221],
+    "name": "Boyalık Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Boyalık"
+  },
+  {
+    "id": 128,
+    "coordinates": [28.68941, 41.26874],
+    "name": "Tayakadın Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Tayakadın"
+  },
+  {
+    "id": 129,
+    "coordinates": [28.69029, 41.27049],
+    "name": "Tayakadın Camii Önü",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Tayakadın"
+  },
+  {
+    "id": 130,
+    "coordinates": [28.67770, 41.18835],
+    "name": "Çilingir Meydan Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Çilingir"
+  },
+  {
+    "id": 258,
+    "coordinates": [28.707689, 41.009348],
+    "name": "Firuzköy Mah. Öğretmen Nesrin-Cuma İbiş Parkı içi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "İnönü Caddesi"
+  },
+  {
+    "id": 259,
+    "coordinates": [28.719846, 41.055878],
+    "name": "Tahtakale Mah. Avcılar Bel. Ispartakule Ek Hizmet Binası yanı Işık Okulları Bahçesi ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Gaffar Okkan Cadde"
+  },
+  {
+    "id": 260,
+    "coordinates": [28.719846, 41.056899],
+    "name": "Tahtakale Mah. Avcılar Bel. Kültür Merkezi Ek Hizmet Binası Bahçesi  ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Petrol Sokak"
+  },
+  {
+    "id": 261,
+    "coordinates": [28.722158, 40.984235],
+    "name": "Merkez Mah. Spor Sk. Avcılar Polis Merkezi Bahçesi ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Spor Sokak"
+  },
+  {
+    "id": 262,
+    "coordinates": [28.721306, 40.97956],
+    "name": "Ahmet Taner Kışlalı Caddesi ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Spor Sokak"
+  },
+  {
+    "id": 263,
+    "coordinates": [28.698589 , 41.013927],
+    "name": "Firuzköy Mah. Kazım Karabekir Cd. Avcılar Bel. Atatürk Stadyumu içi ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Kazım Karabekir Caddesi"
+  },
+  {
+    "id": 264, 
+    "coordinates": [28.61434598488772,40.96574372685352 ],
+    "name": "Mihrap Sokak Parkı ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Dereağzı Beylikdüzü"
+  },
+  {
+    "id": 265, 
+    "coordinates": [28.636470109041564,41.00161269215176 ],
+    "name": "Kışla Caddesi Parkı ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": " Adnan Kahveci, 34528 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 266, 
+    "coordinates": [28.633724372978033,41.0066038024084 ],
+    "name": "Dora Park Site Önü ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": " Adnan Kahveci, 34528 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 267,  
+    "coordinates": [28.633818877423817,41.00646116971999 ],
+    "name": "Cumhuriyet Parkı ",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": " Cumhuriyet, Ali Talip Özdemir Cd"
+  },
+  {
+    "id": 268,   
+    "coordinates": [28.636802367090255,41.006959983056404 ],
+    "name": "Aliye İzzetbegoviç Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": " Cumhuriyet, Derviş Eroğlu Cd., 34520 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 269,   
+    "coordinates": [28.636802367090255,41.006959983056404 ],
+    "name": "Yeşil Alan + Pazar Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": " Cumhuriyet, Derviş Eroğlu Cd., 34520 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 270,   
+    "coordinates": [28.613812259481662,40.970668375764916 ],
+    "name": "Mithat Paşa Ağaçlandırma Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": " Dereağzı, 34528 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 271,  
+    "coordinates": [28.62872166555174,40.9645329300778 ],
+    "name": "Etikent Sitesi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "  Dereağzı, Etikent Sitesi"
+  },
+  {
+    "id": 272,   
+    "coordinates": [ 28.638885902729957,40.969629103384726 ],
+    "name": "Arda Turan Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "  Sahil, Aktoprak Cd"
+  },
+  {
+    "id": 273,  
+    "coordinates": [ 28.646187713956007,41.01255897840084 ],
+    "name": "Kaptanı Derya Sokak Parkı 2",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "   Sahil, 34524 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 274,  
+    "coordinates": [ 28.62919405032909,40.975828798717856 ],
+    "name": "Demokrasi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "   Dereağzı, 34528 Beylikdüzü/İstanbul"
+  },
+  {
+    "id": 275,  
+    "coordinates": [ 28.62919405032909,40.975828798717856 ],
+    "name": "Çetin Albeyoğlu Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "   Dereağzı, 34528 Beylikdüzü/İstanbul"
+  },
+
+
+
+
+
+
+  { 
+    "id": 131, 
+    "coordinates": [   32.517055003792969, 37.978856287480895  ] ,
+    "name": "Selçuklu Japon Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Selçuklu"
+   },
+   {
+    "id": 132,
+    "coordinates": [32.526630588014356, 37.995386619220049],
+    "name": "Selçuklu Kardelen Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Selçuklu"
+  },
+  {
+    "id": 133,
+    "coordinates": [32.479897185001107, 37.893589954644057],
+    "name": "Selçuklu Salı Pazarı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Selçuklu"
+  },
+  {
+    "id": 134,
+    "coordinates": [32.521767178675972, 37.962616328530302],
+    "name": "Selçuklu MTA Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Selçuklu"
+  },
+  {
+    "id": 135,
+    "coordinates": [32.479897185001107, 37.893589954644057],
+    "name": "Selçuklu Salı Pazarı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": "Selçuklu"
+  },
+
+  {
+    "id": 136,
+    "coordinates": [32.11794789738537, 37.239409295981439],
+    "name": "Ahırlı  Şehit Samet Bütün Ortaokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 137,
+    "coordinates": [32.13195705886627, 37.365022093262127],
+    "name": "Akkise Atatürk İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 138,
+    "coordinates": [32.373298838112973, 37.458790095876637],
+    "name": "Akören Arif Bilge Spor Tesisleri",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 139,
+    "coordinates": [32.362865943076201, 37.455861723375868],
+    "name": "Akören Şehit Jandarma Astsubay Çavuş Mehmet Tarlacı Parkı ve Spor Sahası",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 140,
+    "coordinates": [31.414751958709541, 38.360047828392311],
+    "name": "Akşehir Atatürk Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 141,
+    "coordinates": [31.411693605477112, 38.358387157391057],
+    "name": "Akşehir Belediye Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 142,
+    "coordinates": [31.419232444171879, 38.356542739283292],
+    "name": "Akşehir Nasreddin Hoca Gülmece Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 143,
+    "coordinates": [31.427441134319409, 38.359875027981992],
+    "name": "Akşehir Pazar Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 144,
+    "coordinates": [31.419855693610973, 38.36326103691659],
+    "name": "Akşehir Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 145,
+    "coordinates": [31.418342189907154, 38.349102284768477],
+    "name": "Akşehir Hıdırlık Parkı, Açıkhava Tiyatrosu  ve Komek Kurs Merkezi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 146,
+    "coordinates": [31.440191096491517, 38.353275653086286],
+    "name": "Akşehir Spor Kompleksi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 147,
+    "coordinates": [32.859268568271773, 38.303830996791788],
+    "name": "Altınekin Stadyumu ve Kapalı Spor Salonu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 148,
+    "coordinates": [32.871292874427667, 38.310538962585134],
+    "name": "Altınekin Kale Höyüğü Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 149,
+    "coordinates": [32.877603080155517, 38.298896251184189],
+    "name": "Altınekin Toki Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 150,
+    "coordinates": [31.733459394403269, 37.67020210230276],
+    "name": "Beyşehir Cumartesi Pazarı ve Çim Saha",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 151,
+    "coordinates": [31.717797863684702, 37.689285487517786],
+    "name": "Beyşehir Kapalı Spor Salonu ve Eski Stadyum",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 152,
+    "coordinates": [31.721909845116866, 37.679999745290104],
+    "name": "Beyşehir Vuslat Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 153,
+    "coordinates": [32.253742147720757, 37.193152136849953],
+    "name": "Bozkır Çim Saha",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 154,
+    "coordinates": [32.243335487865068, 37.189722172592177],
+    "name": "Bozkır Kapalı Pazar Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 155,
+    "coordinates": [32.550104419592294, 37.215212145220818],
+    "name": "Konya Büyükşehir Belediyesi Sarıoğlan Fen Işleri",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 156,
+    "coordinates": [32.227250169754399, 37.193643226387273],
+    "name": "Bozkır Meslek Yüksekokulu ve Anadolu Lisesi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 157,
+    "coordinates": [32.921023403484561, 38.644031104677005],
+    "name": "Cihanbeyli 15 Temmuz Şehitler Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 158,
+    "coordinates": [32.931641751508629, 38.651298938475655],
+    "name": "Cihanbeyli Kapalı Pazar ve Stadyum",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 159,
+    "coordinates": [31.795999471196314, 39.01860570465648],
+    "name": "Çeltik Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 160,
+    "coordinates": [31.799877718117457, 39.026896947651295],
+    "name": "Çeltik Belediye Sosyal Tesisleri",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 161,
+    "coordinates": [32.771561629730272, 37.570812248841463],
+    "name": "Çumra Durmuş Ali Çalık Şehir Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 162,
+    "coordinates": [32.770662017676877, 37.574639946837642],
+    "name": "Çumra Dr. Devlet Bahçeli Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 163,
+    "coordinates": [32.795392196572124, 37.567034015931284],
+    "name": "Çumra Recep Tayyip Erdoğan Spor Tesisi ve Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 164,
+    "coordinates": [32.743366899722709, 37.573582327807522],
+    "name": "Çumra Sırçalı Mesire Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 165,
+    "coordinates": [32.020231549627169, 38.02157466885749],
+    "name": "Derbent Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 166,
+    "coordinates": [32.013563377173064, 38.0154153371288],
+    "name": "Derbent Kapalı Pazar ve Kültür Merkezi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 167,
+    "coordinates": [31.507452178905794, 37.390749654621537],
+    "name": "Derebucak Şehit Hüseyin Albaşğil İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 168,
+    "coordinates": [31.498228199912241, 37.397983620688109],
+    "name": "Derebucak Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 169,
+    "coordinates": [31.663812952639788, 38.155152154955161],
+    "name": "Doğanhisar Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 170,
+    "coordinates": [31.678217238138597, 38.149021628151417],
+    "name": "Doğanhisar Anadolu Lisesi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 171,
+    "coordinates": [31.675576197215292, 38.144588527199161],
+    "name": "Doğanhisar Halk Pazarı ve Otogar",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 172,
+    "coordinates": [31.67082855855551, 38.132739586474308],
+    "name": "Konya Büyükşehir Belediyesi Doğanhisar Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 173,
+    "coordinates": [33.835789574942368, 37.901839407484047],
+    "name": "Emirgazi Park Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 174,
+    "coordinates": [33.835469484847408, 37.902655572782244],
+    "name": "Emirgazi Pazar Yeri ve Park",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 175,
+    "coordinates": [33.836044582922646, 37.892524857573122],
+    "name": "Emirgazi Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 176,
+    "coordinates": [33.931344326807178, 38.037308185208062],
+    "name": "Emirgazi Demirci İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 177,
+    "coordinates": [34.053415540191438, 37.504276509790536],
+    "name": "Ereğli Kwangjin Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 178,
+    "coordinates": [34.049966200291742, 37.509680964301715],
+    "name": "Ereğli Yunus Emre ve 15 Temmuz Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 179,
+    "coordinates": [34.043456333000613, 37.52350124801707],
+    "name": "Ereğli Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 180,
+    "coordinates": [34.044597540219804, 37.501342935356099],
+    "name": "Ereğli Pazar Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 181,
+    "coordinates": [34.055281434975527, 37.465830128704702],
+    "name": "Ereğli Üniversite Yerleşkesi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 182,
+    "coordinates": [34.061322449294792, 37.535506477871991],
+    "name": "Ereğli Atatürk Kültür Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 183,
+    "coordinates": [32.722885128065627, 37.310650659556309],
+    "name": "Güneysınır Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 184,
+    "coordinates": [32.728319537866867, 37.271396953984308],
+    "name": "Güneysınır Güneybağ İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 185,
+    "coordinates": [32.464512984947064, 36.989299772936356],
+    "name": "Hadim Berika Parkı ve Stadyum",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 186,
+    "coordinates": [32.438226762718905, 36.977154816100594],
+    "name": "Hadim Futbol Sahası ve Kiraz Hali",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 187,
+    "coordinates": [34.194792856078934, 37.440261677480287],
+    "name": "Halkapınar Toki Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 188,
+    "coordinates": [34.184685604011449, 37.434815122621835],
+    "name": "Halkapınar Atatürk İlkokulu ve Arif Arık Çok Proğramlı Anadolu Lisesi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 189,
+    "coordinates": [31.598207398955584, 37.948023099129507],
+    "name": "Hüyük Park Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 190,
+    "coordinates": [31.591170101172633, 37.94639530476173],
+    "name": "Hüyük Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 191,
+    "coordinates": [31.596273089882928, 37.962462756497843],
+    "name": "Hüyük Park Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 192,
+    "coordinates": [31.668109985388146, 37.917931313251465],
+    "name": "Hüyük İmrenler Mesleki ve Teknik Anadolu Lisesi ile Stadyum",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 193,
+    "coordinates": [31.916194865761767, 38.281535135176462],
+    "name": "Ilgın Lala Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 194,
+    "coordinates": [31.899646919830573, 38.275666259237205],
+    "name": "Ilgın İnönü İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 195,
+    "coordinates": [31.877855312860202, 38.284262418603326],
+    "name": "Ilgın Ahmet Ali Gezgin İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 196,
+    "coordinates": [31.896668216172987, 38.283785017080099],
+    "name": "Ilgın Kanal Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 197,
+    "coordinates": [31.905883518087816, 38.277420189482811],
+    "name": "Ilgın Fahrettin Altay Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 198,
+    "coordinates": [31.915572749286802, 38.284098456390396],
+    "name": "Ilgın Kapalı Halk Pazarı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 199,
+    "coordinates": [31.892525586352996, 38.276234751916192],
+    "name": "Ilgın Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 200,
+    "coordinates": [31.717476550488303, 38.288636724396369],
+    "name": "Ilgın Argıthanı Cumhuriyet İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 201,
+    "coordinates": [31.712919719347575, 38.292585049157651],
+    "name": "Ilgın Argıthanı Halk Pazarı ve Otogar",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 202,
+    "coordinates": [32.164067254918393, 38.443925213571525],
+    "name": "Kadınhanı Atlantı Cumhuriyet Ortaokulu ve Stadyum",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 203,
+    "coordinates": [32.203999255256853, 38.244303174017098],
+    "name": "Kadınhanı Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 204,
+    "coordinates": [32.230728161391717, 38.237687898628202],
+    "name": "Kadınhanı Kültür Merkezi ve Park",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 205,
+    "coordinates": [33.548553553490159, 37.72988138888855],
+    "name": "Karapınar A. Hamdi Mutlu Hatıra Ormanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 206,
+    "coordinates": [33.510279506004657, 37.715441231121233],
+    "name": "Karapınar 100. Yıl Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 207,
+    "coordinates": [33.554155003460949, 37.716196101543368],
+    "name": "Karapınar Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 208,
+    "coordinates": [33.543466023435919, 37.713129173225305],
+    "name": "Karapınar Ali Tepe Dinlenme Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 209,
+    "coordinates": [32.527187420971501, 37.899939730353857],
+    "name": "Karatay Aşkar Höyüğü Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 210,
+    "coordinates": [32.530258265143097, 37.906017316887393],
+    "name": "Karatay Şekerciler Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 211,
+    "coordinates": [32.529514437008103, 37.874278819471279],
+    "name": "Karatay Muhsin Yazıcıoğlu Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 212,
+    "coordinates": [32.530497424672063, 37.869555081043863],
+    "name": "Konya Büyükşehir Belediyesi Spor ve Kongre Merkezi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 213,
+    "coordinates": [32.538038967581123, 37.866872480628977],
+    "name": "Karatay Adalet Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 214,
+    "coordinates": [32.512125707520269, 37.870405837909651],
+    "name": "Mevlana Kültür Merkezi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 215,
+    "coordinates": [32.536526264804834, 37.810408998369532],
+    "name": "Karatay Olimpiyat Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 216,
+    "coordinates": [32.553006729654577, 37.878195733624636],
+    "name": "Karatay Şehir Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 217,
+    "coordinates": [33.071924075413165, 39.090470602079904],
+    "name": "Kulu Olof Palme Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 218,
+    "coordinates": [33.080814301054829, 39.094464249039255],
+    "name": "Kulu 80. Yıl Cumhuriyet Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 219,
+    "coordinates": [33.08198655601052, 39.093496159496176],
+    "name": "Kulu Kapalı Pazar Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 220,
+    "coordinates": [33.087431982744192, 39.090182885930979],
+    "name": "Kulu Stadyumu ve Park",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 221,
+    "coordinates": [32.458713801332117, 37.877542031906479],
+    "name": "Meram Şehit Erol Olçok Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 222,
+    "coordinates": [32.453966253258827, 37.865893325848866],
+    "name": "Meram Evliya Çelebi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 223,
+    "coordinates": [32.399676598856402, 37.73946750203234],
+    "name": "Meram Gödene Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 224,
+    "coordinates": [32.440201090150545, 37.846973900387631],
+    "name": "Meram Berlika Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 225,
+    "coordinates": [32.519038892315464, 37.812249046900305],
+    "name": "Meram Karaaslan Hadimi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 226,
+    "coordinates": [32.417018917194142, 37.848524806833439],
+    "name": "Meram Tavusbaba Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 227,
+    "coordinates": [32.405849874220323, 37.822801250344085],
+    "name": "Meram Dutlu Kültür Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 228,
+    "coordinates": [32.39849337139951, 38.264216050352225],
+    "name": "Sarayönü Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 229,
+    "coordinates": [32.380593354751241, 38.190853055229816],
+    "name": "Sarayönü Ladik Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 230,
+    "coordinates": [32.506194711805172, 37.963318113856879],
+    "name": "Selçuklu Yazır Mahalle Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 231,
+    "coordinates": [32.528372642501914, 37.953740656938244],
+    "name": "Selçuklu Sancaktepe Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 232,
+    "coordinates": [32.49780147515029, 37.902512116325575],
+    "name": "Selçuklu Eski Sanayi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 233,
+    "coordinates": [32.526871570671858, 38.011491276015896],
+    "name": "Selçuklu Saray Bosna Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 234,
+    "coordinates": [32.462538029562104, 37.887813431906885],
+    "name": "Selçuklu Ahmet Keleşoğlu Kültür Merkezi ve Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 235,
+    "coordinates": [32.500296881023345, 37.95451242877558],
+    "name": "Selçuklu Kalehan - Ecdat Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 236,
+    "coordinates": [32.492691501990421, 37.962062773741685],
+    "name": "Selçuklu Kanyon Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 237,
+    "coordinates": [32.487103932421505, 37.873883212025042],
+    "name": "Kültür Park",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 238,
+    "coordinates": [32.499773484228015, 37.933075462825862],
+    "name": "Selçuklu Selahaddin Eyyubi Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 239,
+    "coordinates": [32.46246627377807, 37.951244659748198],
+    "name": "Selçuklu Kelebekler Vadisi",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 240,
+    "coordinates": [32.571157498677877, 37.967183223274752],
+    "name": "Selçuklu Türk Yıldızları Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 241,
+    "coordinates": [32.480560594573561, 37.946084181385807],
+    "name": "Konya Büyükşehir Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 242,
+    "coordinates": [31.847552048112345, 37.42444622915886],
+    "name": "Seydişehir Belediye Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 243,
+    "coordinates": [31.853325853038729, 37.421235645609023],
+    "name": "Seydişehir Gaziler ve Şehitler Parkı ile Necip Fazıl Kısakürek Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 244,
+    "coordinates": [31.842242480212246, 37.421548529590865],
+    "name": "Seydişehir Kapalı Pazar Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 245,
+    "coordinates": [31.84305658652497, 37.394532597422312],
+    "name": "Seydişehir Kuğulu Park Mesire Yeri",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 246,
+    "coordinates": [32.495288682585759, 36.927684923181211],
+    "name": "Taşkent Belediye Garajı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 247,
+    "coordinates": [32.496917587872545, 36.910838697556535],
+    "name": "Taşkent Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 248,
+    "coordinates": [32.683730508470326, 36.886837674601999],
+    "name": "Taşkent Balcılar Halı Saha Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 249,
+    "coordinates": [31.629359487802766, 38.474387194626736],
+    "name": "Tuzlukçu İlkokulu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 250,
+    "coordinates": [31.627273370875585, 38.474609183468232],
+    "name": "Tuzlukçu Şehit Birol Parkı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 251,
+    "coordinates": [31.634330883568918, 38.470949486483462],
+    "name": "Tuzlukçu Stadyumu",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 252,
+    "coordinates": [32.083498808578867, 37.298230490568095],
+    "name": "Yalıhüyük Belediye Parkı ve Garaj",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 253,
+    "coordinates": [31.73072886184157, 38.81382830999938],
+    "name": "Yunak Halk Pazarı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 254,
+    "coordinates": [31.733588489800077, 38.8134551800308],
+    "name": "Yunak Yeşil Alan ve Fidanlık",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 255,
+    "coordinates": [31.722660352131861, 38.822211953072141],
+    "name": "Yunak Mesire Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  },
+  {
+    "id": 256,
+    "coordinates": [31.727954258486154, 38.814113281168851],
+    "name": "Yunak Park Alanı",
+    "category": "Acil Durum Toplanma Alanı",
+    "district": ""
+  }
+] 

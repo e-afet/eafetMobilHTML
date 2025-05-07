@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AFET DESTEK - Modern Acil Yardım Uygulaması</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaFZFPZbRHBheZ1_dUXRjFpKVUO04LCnc"></script>
+
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+            :root {
+                --primary: #4f46e5;
+                --primary-dark: #4338ca;
+                --danger: #ef4444;
+                --danger-dark: #dc2626;
+                --success: #10b981;
+                --warning: #f59e0b;
+            }
+
+            body {
+                font-family: "Poppins", sans-serif;
+                background-color: #f9fafb;
+            }
+
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+
+            .emergency-btn {
+                animation: pulse 2s infinite;
+                box-shadow: 0 4px 30px rgba(239, 68, 68, 0.3);
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+                }
+                70% {
+                    transform: scale(1.03);
+                    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+                }
+                100% {
+                    transform: scale(1);
+                    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+                }
+            }
+
+            .map-container {
+                height: 300px;
+                background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+                position: relative;
+                overflow: hidden;
+                border-radius: 16px;
+            }
+
+            .page {
+                display: none;
+                animation: fadeIn 0.3s ease-out;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .page.active {
+                display: block;
+            }
+
+            .nav-link {
+                transition: all 0.2s ease;
+                position: relative;
+            }
+
+            .nav-link.active::after {
+                content: "";
+                position: absolute;
+                bottom: -8px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 6px;
+                height: 6px;
+                background-color: var(--primary);
+                border-radius: 50%;
+            }
+
+            .floating-btn {
+                box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .floating-btn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+            }
+
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+
+            .smooth-transition {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .modal {
+                animation: modalFadeIn 0.3s ease-out;
+            }
+
+            @keyframes modalFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .gradient-text {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+
+            .status-badge {
+                font-size: 0.65rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 9999px;
+                font-weight: 600;
+            }
+
+            #googleMapsModal {
+                z-index: 60;
+            }
+
+            #googleMapsContainer {
+                width: 100%;
+                height: 400px;
+                border-radius: 16px;
+                overflow: hidden;
+            }
+
+            .close-maps-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background: white;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                z-index: 10;
+            }
+            .acil-card {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .acil-card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            }
+            /* 1) EL FENERİ kartı için pulse animasyonu */
+            @keyframes cardPulse {
+                0% {
+                    transform: scale(1);
+                }
+                50% {
+                    transform: scale(1.1);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            .acil-card.flashing {
+                animation: cardPulse 0.4s infinite;
+            }
+            /* Bluetooth liste maddeleri */
+            #bluetoothList li {
+                padding: 0.5rem 1rem;
+                border: 1px solid #e5e7eb;
+                border-radius: 0.75rem;
+                background: #fafafa;
+            }
+            #bluetoothList li:nth-child(odd) {
+                background: #ffffff;
+            } /* Kart boyutlarını büyütüyoruz */
+            .acil-card {
+                padding: 1.5rem;
+                border-radius: 1.25rem;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+            .acil-card div {
+                width: 4rem;
+                height: 4rem;
+            }
+            .acil-card i {
+                font-size: 2.25rem;
+            }
+            .acil-card span {
+                font-size: 1.125rem;
+                margin-top: 0.5rem;
+            }
+
+            /* Kalp atışı animasyonu */
+            @keyframes heartbeat {
+                0%,
+                100% {
+                    transform: scale(1);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                }
+                14%,
+                28% {
+                    transform: scale(1.05);
+                    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            /* Aktif karta eklenen sınıf */
+            .acil-card.active {
+                animation: heartbeat 1.2s ease-in-out infinite;
+                border: 2px solid var(--danger);
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <div
+            class="max-w-md mx-auto bg-white min-h-screen shadow-sm overflow-hidden relative"
+        >
+            <!-- Header -->
+            <header
+                class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-5 rounded-b-3xl"
+            >
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl flex items-center">
+                            <i class="fas fa-hands-helping mr-2"></i>
+                            E-Afet
+                            <h2 class="text-l font-bold flex items-center">
+                                Afet Koordinasyon Sistemi
+                            </h2>
+                        </h1>
+                        <p class="text-sm opacity-90 mt-1" id="pageTitle">
+                            Ana Sayfa
+                        </p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button
+                            id="notificationsBtn"
+                            class="glass-effect hover:bg-opacity-40 p-2 rounded-xl"
+                        >
+                            <i class="fas fa-bell"></i>
+                        </button>
+                        <button
+                            id="profileBtn"
+                            class="glass-effect hover:bg-opacity-40 p-2 rounded-xl"
+                        >
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Container -->
+            <div class="pb-24 px-5">
+                <!-- Home Page -->
+                <div id="homePage" class="page active">
+                    <!-- Emergency Button -->
+                    <div class="p-6">
+                        <a
+                            href="tel:112"
+                            id="emergencyBtn"
+                            class="emergency-btn w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-5 px-4 rounded-xl flex items-center justify-center space-x-3"
+                        >
+                            <i class="fas fa-siren-on text-2xl"></i>
+                            <span class="text-lg">ACİL YARDIM ÇAĞIR</span>
+                        </a>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="space-y-6">
+                        <!-- Location Info -->
+                        <div
+                            class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-hover"
+                        >
+                            <div
+                                class="flex items-center space-x-3 text-indigo-600 mb-4"
+                            >
+                                <i class="fas fa-location-dot text-xl"></i>
+                                <h2 class="font-bold text-lg">Konum Bilgisi</h2>
+                            </div>
+                            <p class="text-gray-600">
+                                Şu anki konumunuz:
+                                <span
+                                    id="currentLocation"
+                                    class="font-medium text-gray-800"
+                                    >Yükleniyor...</span
+                                >
+                            </p>
+                            <div id="homeMap" class="mt-4 map-container">
+                                <div
+                                    class="absolute inset-0 flex items-center justify-center flex-col"
+                                >
+                                    <i
+                                        class="fas fa-map-marked-alt text-5xl mb-3 opacity-20 text-indigo-600"
+                                    ></i>
+                                    <p class="text-sm text-gray-500">
+                                        Toplanma alanları haritada gösteriliyor
+                                    </p>
+                                </div>
+                            </div>
+                            <button
+                                id="listNearestShelters"
+                                class="mt-4 w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white py-3 px-4 rounded-xl flex items-center justify-center space-x-2 font-medium"
+                            >
+                                <i class="fas fa-list-ul"></i>
+                                <span
+                                    >En Yakın Toplanma Alanlarını Listele</span
+                                >
+                            </button>
+                        </div>
+                        <!-- Quick Actions -->
+                        <div>
+                            <h2 class="font-bold text-gray-800 text-lg mb-4">
+                                Hızlı Erişim
+                            </h2>
+                            <div class="grid grid-cols-4 gap-3">
+                                <!-- İlk Yardım → Bilgiler sayfasındaki İlk Yardım sekmesi -->
+                                <button
+                                    class="quick-action-btn bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-indigo-200 hover:bg-indigo-50 card-hover"
+                                    data-page="infoPage"
+                                >
+                                    <div
+                                        class="bg-indigo-100 p-3 rounded-full mb-2 text-indigo-600"
+                                    >
+                                        <i class="fas fa-first-aid text-xl"></i>
+                                    </div>
+                                    <span class="text-xs font-medium"
+                                        >İlk Yardım</span
+                                    >
+                                </button>
+
+                                <!-- Barınma → Harita sayfası -->
+                                <button
+                                    class="quick-action-btn bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-purple-200 hover:bg-purple-50 card-hover"
+                                    data-page="mapPage"
+                                >
+                                    <div
+                                        class="bg-purple-100 p-3 rounded-full mb-2 text-purple-600"
+                                    >
+                                        <i class="fas fa-tent text-xl"></i>
+                                    </div>
+                                    <span class="text-xs font-medium"
+                                        >Barınma</span
+                                    >
+                                </button>
+
+                                <!-- Su/Gıda → İhtiyaçlar sayfası -->
+                                <button
+                                    class="quick-action-btn bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-green-200 hover:bg-green-50 card-hover"
+                                    data-page="infoPage"
+                                >
+                                    <div
+                                        class="bg-green-100 p-3 rounded-full mb-2 text-green-600"
+                                    >
+                                        <i
+                                            class="fas fa-bottle-water text-xl"
+                                        ></i>
+                                    </div>
+                                    <span class="text-xs font-medium"
+                                        >Su/Gıda</span
+                                    >
+                                </button>
+
+                                <!-- Acil No. → Bilgiler sayfasındaki Acil Durum Numaraları bölümü -->
+                                <button
+                                    class="quick-action-btn bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-red-200 hover:bg-red-50 card-hover"
+                                    data-page="profilePage"
+                                >
+                                    <div
+                                        class="bg-red-100 p-3 rounded-full mb-2 text-red-600"
+                                    >
+                                        <i class="fas fa-phone text-xl"></i>
+                                    </div>
+                                    <span class="text-xs font-medium"
+                                        >Acil No.</span
+                                    >
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- İhtiyaç Listesi Kartı -->
+                        <div
+                            class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100"
+                        >
+                            <div
+                                class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-4 flex justify-between items-center"
+                            >
+                                <h2 class="font-bold flex items-center">
+                                    <i class="fas fa-list-check mr-2"></i>
+                                    İhtiyaç Listesi
+                                </h2>
+                                <button
+                                    id="addNeedBtn"
+                                    class="text-xs bg-white text-indigo-600 px-3 py-1.5 rounded-lg font-medium hover:bg-opacity-90"
+                                >
+                                    Yeni Ekle
+                                </button>
+                            </div>
+                            <div id="needsList" class="p-3 space-y-2">
+                                <!-- JS ile doldurulacak -->
+                            </div>
+                        </div>
+
+                        <!-- İhtiyaç Ekle/Düzenle Modalı -->
+                        <div
+                            id="needModal"
+                            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+                        >
+                            <div
+                                class="bg-white rounded-2xl p-6 w-full max-w-sm modal"
+                            >
+                                <h3
+                                    id="modalTitle"
+                                    class="font-bold text-xl mb-4"
+                                >
+                                    Yeni İhtiyaç
+                                </h3>
+                                <div class="space-y-4">
+                                    <input
+                                        id="needName"
+                                        type="text"
+                                        placeholder="İhtiyaç adı"
+                                        class="w-full p-3 border rounded-lg"
+                                    />
+                                    <input
+                                        id="needQty"
+                                        type="text"
+                                        placeholder="Miktar / Açıklama"
+                                        class="w-full p-3 border rounded-lg"
+                                    />
+                                    <select
+                                        id="needPriority"
+                                        class="w-full p-3 border rounded-lg"
+                                    >
+                                        <option value="Acil">Acil</option>
+                                        <option value="Orta">Orta</option>
+                                        <option value="Düşük">Düşük</option>
+                                    </select>
+                                </div>
+                                <div class="mt-6 flex space-x-3">
+                                    <button
+                                        id="saveNeedBtn"
+                                        class="flex-1 bg-indigo-600 text-white py-2 rounded-lg"
+                                    >
+                                        Kaydet
+                                    </button>
+                                    <button
+                                        id="cancelNeedBtn"
+                                        class="flex-1 border border-gray-300 py-2 rounded-lg"
+                                    >
+                                        İptal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Emergency Numbers -->
+                        <div
+                            class="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 card-hover"
+                        >
+                            <h2
+                                class="font-bold text-red-600 text-lg mb-4 flex items-center"
+                            >
+                                <i class="fas fa-phone-emergency mr-2"></i>
+                                Acil Durum Numaraları
+                            </h2>
+                            <div class="space-y-3">
+                                <!-- 112 Ambulans -->
+                                <a
+                                    href="tel:112"
+                                    class="w-full flex justify-between items-center p-3 bg-white rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 smooth-transition"
+                                >
+                                    <div class="flex items-center space-x-3">
+                                        <div
+                                            class="bg-red-100 p-2 rounded-lg text-red-600"
+                                        >
+                                            <i class="fas fa-ambulance"></i>
+                                        </div>
+                                        <span class="font-medium"
+                                            >112 Acil Yardım</span
+                                        >
+                                    </div>
+                                    <span
+                                        class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
+                                        >Ara</span
+                                    >
+                                </a>
+
+                                <!-- 110 İtfaiye -->
+                                <a
+                                    href="tel:110"
+                                    class="w-full flex justify-between items-center p-3 bg-white rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 smooth-transition"
+                                >
+                                    <div class="flex items-center space-x-3">
+                                        <div
+                                            class="bg-red-100 p-2 rounded-lg text-red-600"
+                                        >
+                                            <i
+                                                class="fas fa-fire-extinguisher"
+                                            ></i>
+                                        </div>
+                                        <span class="font-medium"
+                                            >110 İtfaiye</span
+                                        >
+                                    </div>
+                                    <span
+                                        class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
+                                        >Ara</span
+                                    >
+                                </a>
+
+                                <!-- 155 Polis -->
+                                <a
+                                    href="tel:155"
+                                    class="w-full flex justify-between items-center p-3 bg-white rounded-xl border border-gray-200 hover:border-red-200 hover:bg-red-50 smooth-transition"
+                                >
+                                    <div class="flex items-center space-x-3">
+                                        <div
+                                            class="bg-red-100 p-2 rounded-lg text-red-600"
+                                        >
+                                            <i class="fas fa-shield-alt"></i>
+                                        </div>
+                                        <span class="font-medium"
+                                            >155 Polis</span
+                                        >
+                                    </div>
+                                    <span
+                                        class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium"
+                                        >Ara</span
+                                    >
+                                </a>
+
+                                <!-- 122 AFAD -->
+                                <a
+                                    href="tel:122"
+                                    class="w-full flex justify-between items-center p-3 bg-white rounded-xl border border-gray-200 hover:border-blue-200 hover:bg-blue-50 smooth-transition"
+                                >
+                                    <div class="flex items-center space-x-3">
+                                        <div
+                                            class="bg-blue-100 p-2 rounded-lg text-blue-600"
+                                        >
+                                            <i class="fas fa-hands-helping"></i>
+                                        </div>
+                                        <span class="font-medium"
+                                            >122 AFAD</span
+                                        >
+                                    </div>
+                                    <span
+                                        class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+                                        >Ara</span
+                                    >
+                                </a>
+
+                                <!-- 168 Kızılay -->
+                                <a
+                                    href="tel:168"
+                                    class="w-full flex justify-between items-center p-3 bg-white rounded-xl border border-gray-200 hover:border-green-200 hover:bg-green-50 smooth-transition"
+                                >
+                                    <div class="flex items-center space-x-3">
+                                        <div
+                                            class="bg-green-100 p-2 rounded-lg text-green-600"
+                                        >
+                                            <i class="fas fa-heartbeat"></i>
+                                        </div>
+                                        <span class="font-medium"
+                                            >168 Kızılay</span
+                                        >
+                                    </div>
+                                    <span
+                                        class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium"
+                                        >Ara</span
+                                    >
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Page -->
+                <div id="mapPage" class="page px-5">
+                    <div class="pt-4">
+                        <h2 class="font-bold text-xl mb-5 flex items-center">
+                            <i
+                                class="fas fa-map-location-dot text-indigo-600 mr-3 bg-indigo-100 p-3 rounded-xl"
+                            ></i>
+                            Toplanma Alanları Haritası
+                        </h2>
+
+                        <!-- Google Map Canvas -->
+                        <div
+                            id="mapCanvas"
+                            class="map-container rounded-xl mb-6"
+                        ></div>
+
+                        <!-- Yakındaki Toplanma Alanları Listesi -->
+                        <div class="space-y-4 mb-6">
+                            <h3 class="font-bold text-lg text-gray-800">
+                                Yakındaki Toplanma Alanları
+                            </h3>
+                            <!-- JS ile doldurulacak -->
+                            <div id="mapList" class="space-y-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- “ACİL” Page -->
+                <!-- ACİL Sayfası -->
+                <div id="acilPage" class="page px-5">
+                    <div class="pt-4">
+                        <h2 class="font-bold text-xl mb-5 flex items-center">
+                            <i
+                                class="fas fa-exclamation-triangle text-red-600 mr-3 bg-red-100 p-3 rounded-xl"
+                            ></i>
+                            ACİL
+                        </h2>
+
+                        <!-- Kartlar -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- El Feneri -->
+                            <button
+                                id="flashlightBtn"
+                                class="acil-card bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-yellow-500 hover:bg-yellow-50 card-hover"
+                            >
+                                <div
+                                    class="bg-yellow-500 p-4 rounded-full mb-3"
+                                >
+                                    <i
+                                        class="fas fa-lightbulb text-3xl text-white"
+                                    ></i>
+                                </div>
+                                <span class="text-lg font-medium"
+                                    >EL FENERİ</span
+                                >
+                            </button>
+                            <!-- Bluetooth Mesajlaşma -->
+                            <button
+                                id="bluetoothBtn"
+                                class="acil-card bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-blue-500 hover:bg-blue-50 card-hover"
+                            >
+                                <div class="bg-blue-600 p-4 rounded-full mb-3">
+                                    <i
+                                        class="fab fa-bluetooth-b text-3xl text-white"
+                                    ></i>
+                                </div>
+                                <span class="text-lg font-medium"
+                                    >BLUETOOTH</span
+                                >
+                            </button>
+                            <!-- Bluetooth Tarama Modal -->
+                            <div
+                                id="bluetoothModal"
+                                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+                            >
+                                <div
+                                    class="bg-white rounded-2xl p-6 w-full max-w-sm"
+                                >
+                                    <h3 class="font-bold text-lg mb-2">
+                                        Bluetooth Tarama
+                                    </h3>
+                                    <p class="text-sm mb-4">
+                                        Yakındaki cihazlar:
+                                    </p>
+                                    <ul
+                                        id="deviceList"
+                                        class="space-y-2 max-h-60 overflow-y-auto mb-4"
+                                    >
+                                        <!-- JS ile doldurulacak -->
+                                    </ul>
+                                    <button
+                                        id="closeBluetooth"
+                                        class="bg-indigo-600 text-white w-full py-2 rounded-lg"
+                                    >
+                                        Kapat
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Siren -->
+                            <button
+                                id="sirenBtn"
+                                class="acil-card bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-red-500 hover:bg-red-50 card-hover"
+                            >
+                                <div class="bg-red-600 p-4 rounded-full mb-3">
+                                    <i
+                                        class="fas fa-bullhorn text-3xl text-white"
+                                    ></i>
+                                </div>
+                                <span class="text-lg font-medium">DÜDÜK</span>
+                            </button>
+
+                            <!-- Köpek Havlaması -->
+                            <button
+                                id="barkBtn"
+                                class="acil-card bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-yellow-500 hover:bg-yellow-50 card-hover"
+                            >
+                                <div
+                                    class="bg-yellow-600 p-4 rounded-full mb-3"
+                                >
+                                    <i
+                                        class="fas fa-dog text-3xl text-white"
+                                    ></i>
+                                </div>
+                                <span class="text-lg font-medium">HAVLAMA</span>
+                            </button>
+
+                            <!-- Güvendeyim -->
+                            <button
+                                id="safeBtn"
+                                class="acil-card flex flex-col items-center justify-center bg-white rounded-2xl shadow-lg p-6 col-span-2 acil-card bg-white p-3 rounded-xl flex flex-col items-center border border-gray-200 hover:border-green-500 hover:bg-green-50 card-hover"
+                            >
+                                <div class="bg-green-600 p-3 rounded-full mb-3">
+                                    <i
+                                        class="fas fa-check-circle text-4xl text-white"
+                                    ></i>
+                                </div>
+                                <span class="text-lg font-medium"
+                                    >GÜVENDEYİM</span
+                                >
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3) Bluetooth Mesajlaşma Modal -->
+                <div
+                    id="bluetoothModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+                >
+                    <div class="bg-white rounded-2xl p-6 w-full max-w-sm">
+                        <h3 class="font-bold text-lg mb-4">
+                            Bluetooth Mesajlaşma
+                        </h3>
+                        <p class="text-sm mb-4">
+                            Yakındaki kullanıcılara mesaj göndermek için
+                            <em>Bluetooth</em> özelliğini kullanın.
+                        </p>
+                        <button
+                            id="closeBluetooth"
+                            class="mt-2 bg-indigo-600 text-white w-full py-2 rounded-lg"
+                        >
+                            Kapat
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4) “GÜVENDEYİM” Modal -->
+                <div
+                    id="safeModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+                >
+                    <div
+                        class="bg-white rounded-2xl p-6 w-full max-w-sm text-center"
+                    >
+                        <h3 class="font-bold text-lg mb-2">GÜVENDEYİM</h3>
+                        <p class="text-sm mb-4">
+                            Konumunuz ve güvende olduğunuz, kayıtlı kişilere
+                            iletildi.
+                        </p>
+                        <button
+                            id="closeSafe"
+                            class="bg-green-600 text-white w-full py-2 rounded-lg"
+                        >
+                            Tamam
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Page -->
+                <div id="infoPage" class="page px-5">
+                    <div class="pt-4 pb-24">
+                        <h2 class="font-bold text-xl mb-5 flex items-center">
+                            <i
+                                class="fas fa-info-circle text-indigo-600 mr-3 bg-indigo-100 p-3 rounded-xl"
+                            ></i>
+                            Afet Bilgileri
+                        </h2>
+
+                        <div class="space-y-4">
+                            <!-- Acil Durum Prosedürleri -->
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-red-500 to-red-600 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fas fa-triangle-exclamation mr-2"
+                                        ></i>
+                                        <span class="font-bold"
+                                            >Acil Durum Prosedürleri</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="module-content p-4 text-sm text-gray-700 hidden space-y-3"
+                                >
+                                    <h4 class="font-semibold">Deprem</h4>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>Çök-Kapan-Tutun hareketi.</li>
+                                        <li>
+                                            Sabitlenmemiş eşyalardan uzak durun.
+                                        </li>
+                                        <li>
+                                            Asansör ve merdivenleri kullanmayın.
+                                        </li>
+                                    </ul>
+                                    <h4 class="font-semibold">Sel</h4>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>
+                                            Yüksek ve güvenli bölgelere çıkın.
+                                        </li>
+                                        <li>Elektrik kaynaklarını kapatın.</li>
+                                        <li>
+                                            Su birikintilerine araçla girmeyin.
+                                        </li>
+                                    </ul>
+                                    <h4 class="font-semibold">Yangın</h4>
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>
+                                            Kapıları kapatarak dumanı
+                                            engelleyin.
+                                        </li>
+                                        <li>Düşük pozisyonda nefes alın.</li>
+                                        <li>Yangın söndürücü kullanın.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- İlk Yardım Bilgileri -->
+
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <!-- Üst başlık -->
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-green-500 to-green-600 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i class="fas fa-first-aid mr-2"></i>
+                                        <span class="font-bold"
+                                            >İlk Yardım Bilgileri</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <!-- Açılır içerik -->
+                                <div
+                                    class="module-content p-4 space-y-3 text-gray-700 text-sm hidden"
+                                >
+                                    <!-- Kanamayı Durdurma -->
+                                    <div
+                                        class="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden"
+                                    >
+                                        <div
+                                            class="module-header flex justify-between items-center p-3 cursor-pointer"
+                                        >
+                                            <div
+                                                class="flex items-center space-x-3"
+                                            >
+                                                <div
+                                                    class="bg-red-100 p-2 rounded-lg text-red-600"
+                                                >
+                                                    <i
+                                                        class="fas fa-bandage"
+                                                    ></i>
+                                                </div>
+                                                <span class="font-medium"
+                                                    >Kanamayı Durdurma</span
+                                                >
+                                            </div>
+                                            <i
+                                                class="fas fa-chevron-down transition-transform duration-200"
+                                            ></i>
+                                        </div>
+                                        <div
+                                            class="module-content p-3 text-gray-600 text-sm hidden"
+                                        >
+                                            <ul
+                                                class="list-disc list-inside space-y-1"
+                                            >
+                                                <li>
+                                                    Steril bir bez ile doğrudan
+                                                    baskı uygulayın.
+                                                </li>
+                                                <li>
+                                                    Yarayı kalp seviyesinin
+                                                    üzerine kaldırın.
+                                                </li>
+                                                <li>
+                                                    Yaklaşık 5–10 dakika boyunca
+                                                    baskıyı sürdürün.
+                                                </li>
+                                                <li>
+                                                    Devam ederse turnike
+                                                    uygulayıp acil yardım
+                                                    çağırın.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- CPR (Sun’î Solunum) -->
+                                    <div
+                                        class="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden"
+                                    >
+                                        <div
+                                            class="module-header flex justify-between items-center p-3 cursor-pointer"
+                                        >
+                                            <div
+                                                class="flex items-center space-x-3"
+                                            >
+                                                <div
+                                                    class="bg-blue-100 p-2 rounded-lg text-blue-600"
+                                                >
+                                                    <i class="fas fa-lungs"></i>
+                                                </div>
+                                                <span class="font-medium"
+                                                    >CPR (Sun’î Solunum)</span
+                                                >
+                                            </div>
+                                            <i
+                                                class="fas fa-chevron-down transition-transform duration-200"
+                                            ></i>
+                                        </div>
+                                        <div
+                                            class="module-content p-3 text-gray-600 text-sm hidden"
+                                        >
+                                            <ol
+                                                class="list-decimal list-inside space-y-1"
+                                            >
+                                                <li>
+                                                    Bilinci kontrol edin, 112’yi
+                                                    arayın.
+                                                </li>
+                                                <li>
+                                                    Kişiyi sırtüstü yatırın,
+                                                    baş-çene pozisyonu alın.
+                                                </li>
+                                                <li>
+                                                    30 kez göğüs kompresyonu
+                                                    (5–6 cm derinlik).
+                                                </li>
+                                                <li>
+                                                    2 kez kurtarıcı nefes verin.
+                                                </li>
+                                                <li>
+                                                    Yardım gelene kadar 30:2
+                                                    ritmini sürdürün.
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <!-- Yanık Tedavisi -->
+                                    <div
+                                        class="bg-gray-50 border border-gray-200 rounded-xl overflow-hidden"
+                                    >
+                                        <div
+                                            class="module-header flex justify-between items-center p-3 cursor-pointer"
+                                        >
+                                            <div
+                                                class="flex items-center space-x-3"
+                                            >
+                                                <div
+                                                    class="bg-orange-100 p-2 rounded-lg text-orange-600"
+                                                >
+                                                    <i class="fas fa-burn"></i>
+                                                </div>
+                                                <span class="font-medium"
+                                                    >Yanık Tedavisi</span
+                                                >
+                                            </div>
+                                            <i
+                                                class="fas fa-chevron-down transition-transform duration-200"
+                                            ></i>
+                                        </div>
+                                        <div
+                                            class="module-content p-3 text-gray-600 text-sm hidden"
+                                        >
+                                            <ul
+                                                class="list-disc list-inside space-y-1"
+                                            >
+                                                <li>
+                                                    Yanıklı bölgeyi soğuk suyla
+                                                    en az 10 dk yıkayın.
+                                                </li>
+                                                <li>
+                                                    Sıkı giysileri dikkatlice
+                                                    çıkarın.
+                                                </li>
+                                                <li>
+                                                    Steril bez veya yanık
+                                                    örtüsüyle kapatın.
+                                                </li>
+                                                <li>
+                                                    Büyük yanıklarda derhal
+                                                    tıbbi yardım alın.
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tahliye ve Toplanma -->
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i class="fas fa-route mr-2"></i>
+                                        <span class="font-bold"
+                                            >Tahliye &amp; Toplanma</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="module-content p-4 text-gray-700 text-sm hidden"
+                                >
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>
+                                            Harita bölümünden en yakın toplanma
+                                            alanını seçin.
+                                        </li>
+                                        <li>
+                                            Yetkililerin yönlendirmelerine uyun.
+                                        </li>
+                                        <li>
+                                            “Yol Tarifi Al” butonuyla hızlıca
+                                            navigasyon başlatın.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Acil Durum Çantası -->
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i class="fas fa-first-aid mr-2"></i>
+                                        <span class="font-bold"
+                                            >Acil Durum Çantası</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="module-content p-4 text-gray-700 text-sm hidden"
+                                >
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>Su (günlük 4 litre)</li>
+                                        <li>Gıda (konserve, bisküvi)</li>
+                                        <li>İlk yardım malzemeleri</li>
+                                        <li>El feneri &amp; yedek pil</li>
+                                        <li>Düdük, powerbank, belgeler</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- İletişim & Haberleşme -->
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i class="fas fa-comments mr-2"></i>
+                                        <span class="font-bold"
+                                            >İletişim &amp; Haberleşme</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="module-content p-4 text-gray-700 text-sm hidden"
+                                >
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>
+                                            “GÜVENDEYİM” butonuyla konum &amp;
+                                            SMS gönderin.
+                                        </li>
+                                        <li>
+                                            Bluetooth ile yakınınızdaki ekiplere
+                                            ulaşın.
+                                        </li>
+                                        <li>
+                                            İnternet varsa anlık mesajlaşma
+                                            kullanın.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Psikolojik Destek -->
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fas fa-hands-helping mr-2"
+                                        ></i>
+                                        <span class="font-bold"
+                                            >Psikolojik Destek</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="module-content p-4 text-gray-700 text-sm hidden"
+                                >
+                                    <ul class="list-disc list-inside space-y-1">
+                                        <li>
+                                            Nefes egzersizleriyle sakinleşin.
+                                        </li>
+                                        <li>
+                                            Komşularınızla dayanışma oluşturun.
+                                        </li>
+                                        <li>
+                                            “5-5” nefes tekniğini 60 saniye
+                                            uygulayın.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Sık Sorulan Sorular -->
+                            <div
+                                class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden"
+                            >
+                                <div
+                                    class="module-header flex justify-between items-center p-4 bg-gradient-to-r from-gray-700 to-gray-800 text-white cursor-pointer"
+                                >
+                                    <div class="flex items-center">
+                                        <i
+                                            class="fas fa-question-circle mr-2"
+                                        ></i>
+                                        <span class="font-bold"
+                                            >Sık Sorulan Sorular</span
+                                        >
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div
+                                    class="module-content p-4 text-gray-600 text-sm hidden space-y-3"
+                                >
+                                    <div>
+                                        <h4 class="font-medium">
+                                            Nasıl yardım talep ederim?
+                                        </h4>
+                                        <p>
+                                            e-afet.com üzerinden kullanıcı
+                                            hesabı oluşturup yardım talebinizi
+                                            iletebilirsiniz.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">
+                                            Toplanma alanları güncel mi?
+                                        </h4>
+                                        <p>
+                                            Harita verileri otomatik
+                                            güncellenir.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium">
+                                            İnternet yoksa ne yapmalı?
+                                        </h4>
+                                        <p>
+                                            SMS, Bluetooth veya fenerle işaret
+                                            gönderin.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Page -->
+                <div id="profilePage" class="page px-5">
+                    <div class="pt-4 pb-24">
+                        <!-- Başlık -->
+                        <h2 class="font-bold text-xl mb-5 flex items-center">
+                            <i
+                                class="fas fa-user text-indigo-600 mr-3 bg-indigo-100 p-3 rounded-xl"
+                            ></i>
+                            Profil
+                        </h2>
+
+                        <!-- Profil Foto & Adres -->
+                        <div class="flex flex-col items-center mb-6">
+                            <div class="relative mb-4">
+                                <img
+                                    id="profileAvatar"
+                                    src="https://randomuser.me/api/portraits/men/44.jpg"
+                                    alt="Profile"
+                                    class="w-24 h-24 rounded-full border-4 border-white shadow-md"
+                                />
+                                <button
+                                    id="changeAvatarBtn"
+                                    class="absolute bottom-0 right-0 bg-indigo-600 text-white p-2 rounded-full"
+                                >
+                                    <i class="fas fa-user text-sm"></i>
+                                </button>
+                            </div>
+                            <h3 id="displayName" class="font-bold text-xl"></h3>
+                            <p
+                                id="displayLocation"
+                                class="text-gray-600 text-sm"
+                            ></p>
+                        </div>
+
+                        <!-- Kişisel Bilgiler -->
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl overflow-hidden mb-6 shadow-sm"
+                        >
+                            <div
+                                class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-4"
+                            >
+                                <h3 class="font-bold flex items-center">
+                                    <i class="fas fa-user-shield mr-2"></i>
+                                    Kişisel Bilgiler
+                                </h3>
+                            </div>
+                            <div class="p-4 space-y-4">
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Ad Soyad</label
+                                    >
+                                    <input
+                                        id="profileName"
+                                        type="text"
+                                        placeholder="Ad Soyad"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Telefon</label
+                                    >
+                                    <input
+                                        id="profilePhone"
+                                        type="text"
+                                        placeholder="+90 555 123 45 67"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Adres</label
+                                    >
+                                    <textarea
+                                        id="profileAddress"
+                                        rows="2"
+                                        placeholder="İkamet adresiniz"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    ></textarea>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Kan Grubu</label
+                                    >
+                                    <select
+                                        id="profileBlood"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    >
+                                        <option value="">Seçin</option>
+                                        <option>A Rh+</option>
+                                        <option>A Rh-</option>
+                                        <option>B Rh+</option>
+                                        <option>B Rh-</option>
+                                        <option>AB Rh+</option>
+                                        <option>AB Rh-</option>
+                                        <option>0 Rh+</option>
+                                        <option>0 Rh-</option>
+                                    </select>
+                                </div>
+                                <div class="text-right">
+                                    <button
+                                        id="saveProfileBtn"
+                                        class="bg-indigo-600 text-white py-2 px-6 rounded-lg font-medium hover:bg-indigo-700"
+                                    >
+                                        Kaydet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sağlık Bilgileri -->
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl overflow-hidden mb-6 shadow-sm"
+                        >
+                            <div
+                                class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white p-4"
+                            >
+                                <h3 class="font-bold flex items-center">
+                                    <i
+                                        class="fas fa-heart-circle-plus mr-2"
+                                    ></i>
+                                    Sağlık Bilgileri
+                                </h3>
+                            </div>
+                            <div class="p-4 space-y-4">
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Kronik Hastalıklar</label
+                                    >
+                                    <textarea
+                                        id="profileChronic"
+                                        rows="2"
+                                        placeholder="Varsa"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    ></textarea>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Alerjiler</label
+                                    >
+                                    <textarea
+                                        id="profileAllergies"
+                                        rows="2"
+                                        placeholder="Varsa"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    ></textarea>
+                                </div>
+                                <div>
+                                    <label
+                                        class="block text-sm font-medium text-gray-700 mb-1"
+                                        >Kullandığı İlaçlar</label
+                                    >
+                                    <textarea
+                                        id="profileDrugs"
+                                        rows="2"
+                                        placeholder="Varsa"
+                                        class="w-full p-3 border border-gray-200 rounded-lg bg-gray-50"
+                                    ></textarea>
+                                </div>
+                                <div class="text-right">
+                                    <button
+                                        id="saveHealthBtn"
+                                        class="bg-green-600 text-white py-2 px-6 rounded-lg font-medium hover:bg-green-700"
+                                    >
+                                        Kaydet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Yakınlarım -->
+                        <div
+                            class="bg-white border border-gray-200 rounded-2xl overflow-hidden mb-6 shadow-sm"
+                        >
+                            <div
+                                class="bg-gradient-to-r from-pink-600 to-pink-700 text-white p-4 flex justify-between items-center"
+                            >
+                                <h3 class="font-bold flex items-center">
+                                    <i class="fas fa-user-friends mr-2"></i>
+                                    Yakınlarım
+                                </h3>
+                                <button
+                                    id="addRelativeBtn"
+                                    class="bg-white text-pink-600 px-3 py-1 rounded-lg font-medium hover:bg-pink-50"
+                                >
+                                    Yeni Ekle
+                                </button>
+                            </div>
+                            <div id="relativesList" class="p-4 space-y-2">
+                                <!-- JS ile doldurulacak -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yeni Yakın Ekle / Düzenle Modal -->
+                <div
+                    id="relativeModal"
+                    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+                >
+                    <div class="bg-white rounded-2xl p-6 w-full max-w-sm">
+                        <h3
+                            id="relativeModalTitle"
+                            class="font-bold text-lg mb-4 text-center"
+                        >
+                            Yeni Yakın Ekle
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-1"
+                                    >Ad Soyad</label
+                                >
+                                <input
+                                    id="relativeName"
+                                    type="text"
+                                    placeholder="Yakının adı"
+                                    class="w-full p-3 border border-gray-200 rounded-lg"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    class="block text-sm font-medium text-gray-700 mb-1"
+                                    >Telefon</label
+                                >
+                                <input
+                                    id="relativePhone"
+                                    type="text"
+                                    placeholder="+90 555 ..."
+                                    class="w-full p-3 border border-gray-200 rounded-lg"
+                                />
+                            </div>
+                        </div>
+                        <div class="mt-6 flex space-x-3">
+                            <button
+                                id="saveRelativeBtn"
+                                class="flex-1 bg-pink-600 text-white py-2 rounded-lg"
+                            >
+                                Kaydet
+                            </button>
+                            <button
+                                id="cancelRelativeBtn"
+                                class="flex-1 border border-gray-300 py-2 rounded-lg"
+                            >
+                                İptal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav
+                class="bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md py-3 px-4 shadow-lg"
+            >
+                <div class="flex justify-around">
+                    <a
+                        href="#"
+                        class="nav-link active p-2 flex flex-col items-center text-indigo-600 hover:text-indigo-600"
+                        data-page="homePage"
+                    >
+                        <i class="fas fa-home text-xl"></i>
+                        <span class="text-xs mt-1">Ana Sayfa</span>
+                    </a>
+                    <a
+                        href="#"
+                        class="nav-link p-2 flex flex-col items-center text-gray-500 hover:text-indigo-600"
+                        data-page="mapPage"
+                    >
+                        <i class="fas fa-map-location-dot text-xl"></i>
+                        <span class="text-xs mt-1">Harita</span>
+                    </a>
+
+                    <a
+                        href="#"
+                        class="nav-link p-2 flex flex-col items-center text-gray-500 hover:text-indigo-600"
+                        data-page="acilPage"
+                    >
+                        <i class="fas fa-exclamation-triangle text-xl"></i>
+                        <span class="text-xs mt-1">ACİL</span>
+                    </a>
+                    <a
+                        href="#"
+                        class="nav-link p-2 flex flex-col items-center text-gray-500 hover:text-indigo-600"
+                        data-page="infoPage"
+                    >
+                        <i class="fas fa-info-circle text-xl"></i>
+                        <span class="text-xs mt-1">Bilgiler</span>
+                    </a>
+                    <a
+                        href="#"
+                        class="nav-link p-2 flex flex-col items-center text-gray-500 hover:text-indigo-600"
+                        data-page="profilePage"
+                    >
+                        <i class="fas fa-user text-xl"></i>
+                        <span class="text-xs mt-1">Profil</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Emergency Modal -->
+        <div
+            id="emergencyModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+        >
+            <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 modal">
+                <div class="text-center">
+                    <div
+                        class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+                    >
+                        <i
+                            class="fas fa-triangle-exclamation text-red-600 text-2xl"
+                        ></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Acil Yardım Çağrısı</h3>
+                    <p class="text-gray-600 mb-5">
+                        Acil durum çağrısı yapmak üzeresiniz. Konum bilgileriniz
+                        paylaşılacaktır.
+                    </p>
+
+                    <div class="space-y-3">
+                        <button
+                            id="confirmEmergency"
+                            class="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white py-3 px-4 rounded-xl font-medium"
+                        >
+                            Çağrı Gönder
+                        </button>
+                        <button
+                            id="cancelEmergency"
+                            class="w-full border border-gray-300 hover:bg-gray-100 py-3 px-4 rounded-xl font-medium"
+                        >
+                            İptal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Need Modal -->
+        <div
+            id="addNeedModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
+        >
+            <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 modal">
+                <div>
+                    <h3 class="font-bold text-xl mb-5 text-center">
+                        Yeni İhtiyaç Ekle
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label
+                                class="block text-left text-sm font-medium text-gray-700 mb-2"
+                                >İhtiyaç Türü</label
+                            >
+                            <select
+                                class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                            >
+                                <option>Su</option>
+                                <option>Gıda</option>
+                                <option>İlaç</option>
+                                <option>Battaniye</option>
+                                <option>Diğer</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-left text-sm font-medium text-gray-700 mb-2"
+                                >Acil Durum</label
+                            >
+                            <div class="flex space-x-3">
+                                <button
+                                    class="flex-1 bg-red-100 hover:bg-red-200 text-red-800 py-2 px-3 rounded-xl text-sm font-medium"
+                                >
+                                    Acil
+                                </button>
+                                <button
+                                    class="flex-1 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 py-2 px-3 rounded-xl text-sm font-medium"
+                                >
+                                    Orta
+                                </button>
+                                <button
+                                    class="flex-1 bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded-xl text-sm font-medium"
+                                >
+                                    Düşük
+                                </button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-left text-sm font-medium text-gray-700 mb-2"
+                                >Miktar</label
+                            >
+                            <input
+                                type="text"
+                                class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                placeholder="Örn: 2 litre"
+                            />
+                        </div>
+
+                        <div>
+                            <label
+                                class="block text-left text-sm font-medium text-gray-700 mb-2"
+                                >Açıklama</label
+                            >
+                            <textarea
+                                class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                                rows="3"
+                                placeholder="Detaylı açıklama..."
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 space-y-3">
+                        <button
+                            id="saveNeedBtn"
+                            class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white py-3 px-4 rounded-xl font-medium"
+                        >
+                            Kaydet
+                        </button>
+                        <button
+                            id="cancelAddNeed"
+                            class="w-full border border-gray-300 hover:bg-gray-100 py-3 px-4 rounded-xl font-medium"
+                        >
+                            İptal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Maps Modal -->
+        <div
+            id="googleMapsModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-60"
+        >
+            <div
+                class="bg-white rounded-2xl p-6 max-w-md w-full mx-4 modal relative"
+            >
+                <button id="closeMapsBtn" class="close-maps-btn">
+                    <i class="fas fa-times text-gray-600"></i>
+                </button>
+                <h3 class="font-bold text-lg mb-4">En Yakın Toplanma Alanı</h3>
+                <p class="text-sm text-gray-600 mb-4">
+                    Konumunuz: <span id="mapsLocationText">Yükleniyor...</span>
+                </p>
+                <div id="googleMapsContainer">
+                    <div
+                        class="absolute inset-0 flex items-center justify-center flex-col"
+                    >
+                        <i
+                            class="fas fa-map-marked-alt text-5xl mb-3 opacity-20 text-indigo-600"
+                        ></i>
+                        <p class="text-sm text-gray-500">
+                            Harita yükleniyor...
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-4 flex space-x-3">
+                    <button
+                        id="openInGoogleMaps"
+                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-xl text-sm font-medium flex items-center justify-center"
+                    >
+                        <i class="fab fa-google mr-2"></i> Google Maps'te Aç
+                    </button>
+                    <button
+                        id="getDirections"
+                        class="flex-1 bg-green-500 hover:bg-green-600 text-white py-3 px-4 rounded-xl text-sm font-medium flex items-center justify-center"
+                    >
+                        <i class="fas fa-directions mr-2"></i> Yol Tarifi Al
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div
+            id="listModal"
+            class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-60"
+        >
+            <div
+                class="bg-white rounded-2xl p-6 max-w-lg w-full mx-4 modal relative"
+            >
+                <button id="closeListBtn" class="close-maps-btn">
+                    <i class="fas fa-times text-gray-600"></i>
+                </button>
+                <h3 class="font-bold text-lg mb-4">
+                    En Yakın 5 Toplanma Alanı
+                </h3>
+                <div
+                    id="shelterList"
+                    class="space-y-3 max-h-80 overflow-y-auto"
+                >
+                    <!-- JS ile doldurulacak -->
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll(".module-header").forEach((header) => {
+                header.addEventListener("click", () => {
+                    const icon = header.querySelector(".fa-chevron-down");
+                    const content = header.nextElementSibling;
+                    content.classList.toggle("hidden");
+                    icon.classList.toggle("rotate-180");
+                });
+            });
+            (async () => {
+                // —————————————————————————————————————————
+                // 1) Konum Bilgisini Al & Ana Sayfa Haritasını Başlat
+                // —————————————————————————————————————————
+                const locEl = document.getElementById("currentLocation");
+                let userLat, userLng;
+                if (navigator.geolocation) {
+                    locEl.textContent = "Alınıyor…";
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => {
+                            userLat = pos.coords.latitude;
+                            userLng = pos.coords.longitude;
+                            locEl.textContent = `${userLat.toFixed(
+                                4
+                            )}, ${userLng.toFixed(4)}`;
+                            const homeMap = new google.maps.Map(
+                                document.getElementById("homeMap"),
+                                {
+                                    center: { lat: userLat, lng: userLng },
+                                    zoom: 13,
+                                }
+                            );
+                            new google.maps.Marker({
+                                position: { lat: userLat, lng: userLng },
+                                map: homeMap,
+                                title: "Siz buradasınız",
+                            });
+                        },
+                        (err) => {
+                            console.warn("Konum hatası:", err);
+                            locEl.textContent = "Konum izin yok";
+                        },
+                        { enableHighAccuracy: true, timeout: 5000 }
+                    );
+                } else {
+                    locEl.textContent = "Tarayıcı desteklemiyor";
+                }
+
+                // —————————————————————————————————————————
+                // 2) Toplanma Alanlarını JSON’dan Yükle
+                // —————————————————————————————————————————
+                const shelters = await fetch("gathering-area.json")
+                    .then((r) => r.json())
+                    .catch((e) => {
+                        console.error("JSON yükleme hatası:", e);
+                        return [];
+                    });
+
+                // —————————————————————————————————————————
+                // 3) Haversine ile Mesafe Hesaplama
+                // —————————————————————————————————————————
+                function getDistance(lat1, lng1, lat2, lng2) {
+                    const toRad = (x) => (x * Math.PI) / 180;
+                    const R = 6371000;
+                    const dLat = toRad(lat2 - lat1);
+                    const dLng = toRad(lng2 - lng1);
+                    const a =
+                        Math.sin(dLat / 2) ** 2 +
+                        Math.cos(toRad(lat1)) *
+                            Math.cos(toRad(lat2)) *
+                            Math.sin(dLng / 2) ** 2;
+                    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                    return R * c;
+                }
+
+                // —————————————————————————————————————————
+                // 4) Sayfalar Arası Geçiş (Nav + Quick Actions)
+                // —————————————————————————————————————————
+                const navLinks = document.querySelectorAll(".nav-link");
+                const quickBtns =
+                    document.querySelectorAll(".quick-action-btn");
+                const pages = document.querySelectorAll(".page");
+                const titleEl = document.getElementById("pageTitle");
+
+                navLinks.forEach((a) =>
+                    a.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        const target = a.dataset.page;
+                        pages.forEach((p) => p.classList.remove("active"));
+                        document.getElementById(target).classList.add("active");
+                        navLinks.forEach((n) =>
+                            n.classList.remove("active", "text-indigo-600")
+                        );
+                        a.classList.add("active", "text-indigo-600");
+                        titleEl.textContent =
+                            a.querySelector("span").textContent;
+                        if (target === "mapPage") initMapPage();
+                    })
+                );
+
+                quickBtns.forEach((btn) =>
+                    btn.addEventListener("click", () => {
+                        const page = btn.dataset.page;
+                        pages.forEach((p) => p.classList.remove("active"));
+                        document.getElementById(page).classList.add("active");
+                        navLinks.forEach((n) =>
+                            n.classList.remove("active", "text-indigo-600")
+                        );
+                        const nav = document.querySelector(
+                            `.nav-link[data-page="${page}"]`
+                        );
+                        nav.classList.add("active", "text-indigo-600");
+                        titleEl.textContent =
+                            nav.querySelector("span").textContent;
+                        if (page === "mapPage") initMapPage();
+                    })
+                );
+                // —————————————————————————————————————————
+                // Helper: Sayfa Geçişi Fonksiyonu
+                // —————————————————————————————————————————
+                function goToPage(page) {
+                    // tüm sayfaları gizle
+                    pages.forEach((p) => p.classList.remove("active"));
+                    // hedefi göster
+                    document.getElementById(page).classList.add("active");
+                    // alt nav linklerini resetle
+                    navLinks.forEach((n) =>
+                        n.classList.remove("active", "text-indigo-600")
+                    );
+                    // ilgili nav-link’e active class ekle, başlığı güncelle
+                    const nav = document.querySelector(
+                        `.nav-link[data-page="${page}"]`
+                    );
+                    if (nav) {
+                        nav.classList.add("active", "text-indigo-600");
+                        titleEl.textContent =
+                            nav.querySelector("span").textContent;
+                    }
+                    // Harita sayfasıysa haritayı başlat
+                    if (page === "mapPage") initMapPage();
+                }
+
+                // —————————————————————————————————————————
+                // Header İkonlarıyla Sayfa Geçişi
+                // —————————————————————————————————————————
+                document
+                    .getElementById("notificationsBtn")
+                    .addEventListener("click", () => goToPage("infoPage"));
+                document
+                    .getElementById("profileBtn")
+                    .addEventListener("click", () => goToPage("profilePage"));
+
+                // —————————————————————————————————————————
+                // 5) 112’yi Arayan Acil Yardım Çağır Butonu
+                // —————————————————————————————————————————
+                document
+                    .getElementById("emergencyBtn")
+                    .addEventListener("click", () => {
+                        window.location.href = "tel:112";
+                    });
+
+                // —————————————————————————————————————————
+                // 6) “En Yakın 5 Toplanma Alanı” Modal
+                // —————————————————————————————————————————
+                const listBtn = document.getElementById("listNearestShelters");
+                const listModal = document.getElementById("listModal");
+                const closeList = document.getElementById("closeListBtn");
+                const listDiv = document.getElementById("shelterList");
+
+                listBtn.addEventListener("click", () => {
+                    listModal.classList.remove("hidden");
+                    listDiv.innerHTML =
+                        '<p class="text-gray-500">Konum alınıyor…</p>';
+                    if (!navigator.geolocation) {
+                        listDiv.innerHTML =
+                            '<p class="text-red-500">Tarayıcı desteklemiyor</p>';
+                        return;
+                    }
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => {
+                            const lat = pos.coords.latitude;
+                            const lng = pos.coords.longitude;
+                            const nearest = shelters
+                                .map((s) => {
+                                    const [lngS, latS] = s.coordinates;
+                                    return {
+                                        ...s,
+                                        dist: getDistance(lat, lng, latS, lngS),
+                                    };
+                                })
+                                .sort((a, b) => a.dist - b.dist)
+                                .slice(0, 5);
+                            listDiv.innerHTML = nearest
+                                .map(
+                                    (s) => `
+        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg shadow-sm">
+          <div>
+            <p class="font-medium">${s.name}</p>
+            <p class="text-xs text-gray-500">${(s.dist / 1000).toFixed(
+                2
+            )} km</p>
+          </div>
+          <button data-lat="${s.coordinates[1]}" data-lng="${s.coordinates[0]}"
+                  class="route-btn bg-indigo-600 text-white py-1 px-3 rounded-lg text-sm">
+            Yol Tarifi Al
+          </button>
+        </div>
+      `
+                                )
+                                .join("");
+                            document
+                                .querySelectorAll(".route-btn")
+                                .forEach((btn) => {
+                                    btn.addEventListener("click", () => {
+                                        const destLat = btn.dataset.lat;
+                                        const destLng = btn.dataset.lng;
+                                        const url =
+                                            `https://www.google.com/maps/dir/?api=1` +
+                                            `&origin=${lat},${lng}` +
+                                            `&destination=${destLat},${destLng}` +
+                                            `&travelmode=walking`;
+                                        window.open(url, "_blank");
+                                    });
+                                });
+                        },
+                        (err) => {
+                            console.warn("Konum hatası:", err);
+                            listDiv.innerHTML =
+                                '<p class="text-red-500">Konum izni gerek</p>';
+                        },
+                        { enableHighAccuracy: true, timeout: 5000 }
+                    );
+                });
+
+                closeList.addEventListener("click", () => {
+                    listModal.classList.add("hidden");
+                });
+
+                // —————————————————————————————————————————
+                // 7) Map Page: Dinamik Map & Liste
+                // —————————————————————————————————————————
+                let mapPageLoaded = false;
+                function initMapPage() {
+                    if (mapPageLoaded) return;
+                    mapPageLoaded = true;
+                    const mapContainer = document.getElementById("mapCanvas");
+                    if (!navigator.geolocation) return;
+                    navigator.geolocation.getCurrentPosition(
+                        (pos) => {
+                            const lat = pos.coords.latitude;
+                            const lng = pos.coords.longitude;
+                            const map = new google.maps.Map(mapContainer, {
+                                center: { lat, lng },
+                                zoom: 12,
+                            });
+                            new google.maps.Marker({
+                                position: { lat, lng },
+                                map,
+                                title: "Siz buradasınız",
+                            });
+                            shelters.forEach((s) => {
+                                const [lngS, latS] = s.coordinates;
+                                new google.maps.Marker({
+                                    position: { lat: latS, lng: lngS },
+                                    map,
+                                    title: s.name,
+                                });
+                            });
+                            const mapList = document.getElementById("mapList");
+                            const nearest = shelters
+                                .map((s) => {
+                                    const [lngS, latS] = s.coordinates;
+                                    return {
+                                        ...s,
+                                        dist: getDistance(lat, lng, latS, lngS),
+                                    };
+                                })
+                                .sort((a, b) => a.dist - b.dist)
+                                .slice(0, 5);
+                            mapList.innerHTML = nearest
+                                .map(
+                                    (s) => `
+        <div class="bg-white border border-gray-200 rounded-xl p-5 card-hover">
+          <div class="flex justify-between items-start">
+            <div>
+              <h3 class="font-bold text-lg">${s.name}</h3>
+              <p class="text-sm text-gray-600 mt-1">
+                <i class="fas fa-location-arrow mr-1"></i>
+                ${(s.dist / 1000).toFixed(2)} km uzaklıkta
+              </p>
+            </div>
+            <button data-lat="${s.coordinates[1]}" data-lng="${
+                                        s.coordinates[0]
+                                    }"
+                    class="route-btn bg-indigo-600 text-white py-1 px-3 rounded-lg text-sm">
+              Yol Tarifi Al
+            </button>
+          </div>
+        </div>
+      `
+                                )
+                                .join("");
+                            mapList
+                                .querySelectorAll(".route-btn")
+                                .forEach((btn) => {
+                                    btn.addEventListener("click", () => {
+                                        const destLat = btn.dataset.lat;
+                                        const destLng = btn.dataset.lng;
+                                        const url =
+                                            `https://www.google.com/maps/dir/?api=1` +
+                                            `&origin=${lat},${lng}` +
+                                            `&destination=${destLat},${destLng}` +
+                                            `&travelmode=walking`;
+                                        window.open(url, "_blank");
+                                    });
+                                });
+                        },
+                        (err) => console.warn("Map page konum hatası:", err),
+                        { enableHighAccuracy: true, timeout: 5000 }
+                    );
+                }
+
+                // —————————————————————————————————————————
+                // 8) “ACİL” Sayfası Etkileşimleri
+                // —————————————————————————————————————————
+                const acilCards = document.querySelectorAll(".acil-card");
+                acilCards.forEach((card) => {
+                    card.addEventListener("click", () => {
+                        const wasActive = card.classList.contains("active");
+                        acilCards.forEach((c) => c.classList.remove("active"));
+                        if (!wasActive) card.classList.add("active");
+
+                        switch (card.id) {
+                            case "flashlightBtn":
+                                toggleFlashlight();
+                                break;
+                            case "sirenBtn":
+                                toggleSiren();
+                                break;
+                            case "barkBtn":
+                                toggleBark();
+                                break;
+                            case "bluetoothBtn":
+                                toggleBluetooth();
+                                break;
+                            case "safeBtn":
+                                toggleSafe();
+                                break;
+                        }
+                    });
+                });
+
+                // —————————————————————————————————————————
+                // 8a) EL FENERİ Strobe
+                // —————————————————————————————————————————
+                let torchStream, torchTrack, strobeInterval;
+                async function toggleFlashlight() {
+                    if (strobeInterval) {
+                        clearInterval(strobeInterval);
+                        strobeInterval = null;
+                        try {
+                            await torchTrack.applyConstraints({
+                                advanced: [{ torch: false }],
+                            });
+                            torchTrack.stop();
+                            torchStream.getTracks().forEach((t) => t.stop());
+                        } catch (e) {}
+                        return;
+                    }
+                    try {
+                        torchStream = await navigator.mediaDevices.getUserMedia(
+                            {
+                                video: { facingMode: "environment" },
+                            }
+                        );
+                        torchTrack = torchStream.getVideoTracks()[0];
+                        await torchTrack.applyConstraints({
+                            advanced: [{ torch: true }],
+                        });
+                        strobeInterval = setInterval(async () => {
+                            const current = torchTrack.getSettings().torch;
+                            await torchTrack.applyConstraints({
+                                advanced: [{ torch: !current }],
+                            });
+                        }, 300);
+                    } catch (err) {
+                        console.error("Fener başlatılamadı:", err);
+                        alert("Fener özelliği cihazınızda desteklenmiyor.");
+                        if (torchStream)
+                            torchStream.getTracks().forEach((t) => t.stop());
+                    }
+                }
+
+                // —————————————————————————————————————————
+                // 8b) Siren & Havlama
+                // —————————————————————————————————————————
+                const sirenAudio = new Audio("ddk.mp3");
+                const barkAudio = new Audio("dogBark.mp3");
+                function toggleSiren() {
+                    barkAudio.pause();
+                    sirenAudio.paused ? sirenAudio.play() : sirenAudio.pause();
+                }
+                function toggleBark() {
+                    sirenAudio.pause();
+                    barkAudio.paused ? barkAudio.play() : barkAudio.pause();
+                }
+
+                // —————————————————————————————————————————
+                // 8c) Bluetooth Tarama
+                // —————————————————————————————————————————
+                let btScan = null;
+                const bluetoothModal =
+                    document.getElementById("bluetoothModal");
+                const deviceListEl = document.getElementById("deviceList");
+                async function toggleBluetooth() {
+                    if (!navigator.bluetooth) {
+                        alert("Bluetooth API desteklenmiyor.");
+                        return;
+                    }
+                    deviceListEl.innerHTML =
+                        '<li class="text-gray-500">Tarama başlatılıyor…</li>';
+                    bluetoothModal.classList.remove("hidden");
+                    try {
+                        if (navigator.bluetooth.requestLEScan) {
+                            btScan = await navigator.bluetooth.requestLEScan({
+                                acceptAllAdvertisements: true,
+                            });
+                            navigator.bluetooth.addEventListener(
+                                "advertisementreceived",
+                                (event) => {
+                                    addDevice(event.device);
+                                }
+                            );
+                            setTimeout(() => {
+                                if (btScan && btScan.active) btScan.stop();
+                            }, 10000);
+                        } else {
+                            deviceListEl.innerHTML =
+                                '<li class="text-gray-500">Lütfen bir cihaz seçin…</li>';
+                            const device =
+                                await navigator.bluetooth.requestDevice({
+                                    acceptAllDevices: true,
+                                });
+                            deviceListEl.innerHTML = "";
+                            addDevice(device);
+                        }
+                    } catch (err) {
+                        deviceListEl.innerHTML =
+                            '<li class="text-red-500">Uyumlu Cihaz Bulunamadı</li>';
+                    }
+                }
+                function addDevice(device) {
+                    const id = (device.id || device.name || Math.random())
+                        .toString()
+                        .replace(/[:.]/g, "-");
+                    if (document.getElementById(`device-${id}`)) return;
+                    const li = document.createElement("li");
+                    li.id = `device-${id}`;
+                    li.className = "p-2 bg-gray-100 rounded";
+                    li.textContent = device.name || "Bilinmeyen Cihaz";
+                    deviceListEl.appendChild(li);
+                }
+                document
+                    .getElementById("closeBluetooth")
+                    .addEventListener("click", () => {
+                        bluetoothModal.classList.add("hidden");
+                        if (btScan && btScan.active) btScan.stop();
+                    });
+
+                // —————————————————————————————————————————
+                // 8d) “GÜVENDEYİM” Modal
+                // —————————————————————————————————————————
+                const safeModal = document.getElementById("safeModal");
+                function toggleSafe() {
+                    safeModal.classList.toggle("hidden");
+                }
+                document
+                    .getElementById("closeSafe")
+                    .addEventListener("click", () => {
+                        safeModal.classList.add("hidden");
+                    });
+            })();
+
+            (() => {
+                // ——————————————————————————————————————
+                // A) State + LocalStorage
+                // ——————————————————————————————————————
+                let needs = JSON.parse(localStorage.getItem("needs") || "[]");
+
+                // ——————————————————————————————————————
+                // B) DOM Referansları
+                // ——————————————————————————————————————
+                const needsListEl = document.getElementById("needsList");
+                const addNeedBtn = document.getElementById("addNeedBtn");
+                const needModal = document.getElementById("needModal");
+                const modalTitle = document.getElementById("modalTitle");
+                const nameInput = document.getElementById("needName");
+                const qtyInput = document.getElementById("needQty");
+                const prioritySelect = document.getElementById("needPriority");
+                const saveNeedBtn = document.getElementById("saveNeedBtn");
+                const cancelNeedBtn = document.getElementById("cancelNeedBtn");
+
+                let editIndex = null;
+
+                // ——————————————————————————————————————
+                // C) Render Fonksiyonu
+                // ——————————————————————————————————————
+                function renderNeeds() {
+                    needsListEl.innerHTML = needs
+                        .map(
+                            (n, i) => `
+      <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200 hover:border-indigo-200 smooth-transition">
+        <div class="flex-1">
+          <p class="font-medium">${
+              n.name
+          } <span class="text-xs text-gray-500">(${n.qty})</span></p>
+          <span class="status-badge ${
+              {
+                  Acil: "bg-red-100 text-red-800",
+                  Orta: "bg-yellow-100 text-yellow-800",
+                  Düşük: "bg-green-100 text-green-800",
+              }[n.priority]
+          }">${n.priority}</span>
+        </div>
+        <div class="flex space-x-2">
+          <button class="edit-btn text-indigo-600 p-1"><i class="fas fa-edit"></i></button>
+          <button class="delete-btn text-red-600 p-1"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    `
+                        )
+                        .join("");
+
+                    // edit ve delete butonlarını ata
+                    document.querySelectorAll(".edit-btn").forEach((btn, i) => {
+                        btn.addEventListener("click", () =>
+                            openModal("edit", i)
+                        );
+                    });
+                    document
+                        .querySelectorAll(".delete-btn")
+                        .forEach((btn, i) => {
+                            btn.addEventListener("click", () => {
+                                needs.splice(i, 1);
+                                saveAndRender();
+                            });
+                        });
+                }
+
+                // ——————————————————————————————————————
+                // D) Modal Aç/Kapat + Kaydet
+                // ——————————————————————————————————————
+                function openModal(mode, i = null) {
+                    editIndex = i;
+                    if (mode === "edit") {
+                        modalTitle.textContent = "İhtiyacı Düzenle";
+                        const n = needs[i];
+                        nameInput.value = n.name;
+                        qtyInput.value = n.qty;
+                        prioritySelect.value = n.priority;
+                    } else {
+                        modalTitle.textContent = "Yeni İhtiyaç";
+                        nameInput.value = qtyInput.value = "";
+                        prioritySelect.value = "Acil";
+                    }
+                    needModal.classList.remove("hidden");
+                }
+                function closeModal() {
+                    needModal.classList.add("hidden");
+                }
+                saveNeedBtn.addEventListener("click", () => {
+                    const name = nameInput.value.trim();
+                    const qty = qtyInput.value.trim();
+                    const priority = prioritySelect.value;
+                    if (!name) return alert("Lütfen ihtiyaç adını girin.");
+                    if (editIndex === null) {
+                        needs.push({ name, qty, priority });
+                    } else {
+                        needs[editIndex] = { name, qty, priority };
+                    }
+                    saveAndRender();
+                    closeModal();
+                });
+                cancelNeedBtn.addEventListener("click", closeModal);
+
+                // ——————————————————————————————————————
+                // E) State’i Kaydet + Yeniden Render Et
+                // ——————————————————————————————————————
+                function saveAndRender() {
+                    localStorage.setItem("needs", JSON.stringify(needs));
+                    renderNeeds();
+                }
+
+                // ——————————————————————————————————————
+                // F) Başlangıç
+                // ——————————————————————————————————————
+                addNeedBtn.addEventListener("click", () => openModal("add"));
+                renderNeeds();
+
+                // --- Profil CRUD ---
+                const profileKey = "userProfile";
+                const healthKey = "userHealth";
+                const nameEl = document.getElementById("profileName");
+                const phoneEl = document.getElementById("profilePhone");
+                const addrEl = document.getElementById("profileAddress");
+                const bloodEl = document.getElementById("profileBlood");
+                const displayName = document.getElementById("displayName");
+                const displayLocation =
+                    document.getElementById("displayLocation");
+
+                function loadProfile() {
+                    const p = JSON.parse(
+                        localStorage.getItem(profileKey) || "{}"
+                    );
+                    nameEl.value = p.name || "";
+                    phoneEl.value = p.phone || "";
+                    addrEl.value = p.address || "";
+                    bloodEl.value = p.blood || "";
+                    if (p.name) displayName.textContent = p.name;
+                    if (p.address) displayLocation.textContent = p.address;
+                }
+                document
+                    .getElementById("saveProfileBtn")
+                    .addEventListener("click", () => {
+                        const p = {
+                            name: nameEl.value.trim(),
+                            phone: phoneEl.value.trim(),
+                            address: addrEl.value.trim(),
+                            blood: bloodEl.value,
+                        };
+                        localStorage.setItem(profileKey, JSON.stringify(p));
+                        loadProfile();
+                        alert("Profil kaydedildi.");
+                    });
+                loadProfile();
+
+                // Sağlık bilgileri ayrı kaydedilebilir
+                const chronicEl = document.getElementById("profileChronic");
+                const allergyEl = document.getElementById("profileAllergies");
+                const drugsEl = document.getElementById("profileDrugs");
+                function loadHealth() {
+                    const h = JSON.parse(
+                        localStorage.getItem(healthKey) || "{}"
+                    );
+                    chronicEl.value = h.chronic || "";
+                    allergyEl.value = h.allergies || "";
+                    drugsEl.value = h.drugs || "";
+                }
+                document
+                    .getElementById("saveHealthBtn")
+                    .addEventListener("click", () => {
+                        const h = {
+                            chronic: chronicEl.value.trim(),
+                            allergies: allergyEl.value.trim(),
+                            drugs: drugsEl.value.trim(),
+                        };
+                        localStorage.setItem(healthKey, JSON.stringify(h));
+                        alert("Sağlık bilgileriniz kaydedildi.");
+                    });
+                loadHealth();
+
+                // --- Yakınlarım CRUD ---
+                const relKey = "relatives";
+                let relatives = JSON.parse(
+                    localStorage.getItem(relKey) || "[]"
+                );
+                const relListEl = document.getElementById("relativesList");
+                const addRelBtn = document.getElementById("addRelativeBtn");
+                const relModal = document.getElementById("relativeModal");
+                const relTitle = document.getElementById("relativeModalTitle");
+                const relNameEl = document.getElementById("relativeName");
+                const relPhoneEl = document.getElementById("relativePhone");
+                const saveRelBtn = document.getElementById("saveRelativeBtn");
+                const cancelRelBtn =
+                    document.getElementById("cancelRelativeBtn");
+                let edittIndex = null;
+
+                function renderRelatives() {
+                    relListEl.innerHTML = relatives
+                        .map(
+                            (r, i) =>
+                                `<div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-200">
+        <div>
+          <p class="font-medium">${r.name}</p>
+          <p class="text-xs text-gray-500">${r.phone}</p>
+        </div>
+        <div class="flex space-x-2">
+          <button data-i="${i}" class="edit-rel text-indigo-600"><i class="fas fa-edit"></i></button>
+          <button data-i="${i}" class="del-rel text-red-600"><i class="fas fa-trash-alt"></i></button>
+        </div>
+      </div>`
+                        )
+                        .join("");
+                    // edit handlers
+                    document.querySelectorAll(".edit-rel").forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            edittIndex = +btn.dataset.i;
+                            const r = relatives[edittIndex];
+                            relTitle.textContent = "Yakını Düzenle";
+                            relNameEl.value = r.name;
+                            relPhoneEl.value = r.phone;
+                            relModal.classList.remove("hidden");
+                        });
+                    });
+                    // delete handlers
+                    document.querySelectorAll(".del-rel").forEach((btn) => {
+                        btn.addEventListener("click", () => {
+                            if (confirm("Silinsin mi?")) {
+                                relatives.splice(+btn.dataset.i, 1);
+                                localStorage.setItem(
+                                    relKey,
+                                    JSON.stringify(relatives)
+                                );
+                                renderRelatives();
+                            }
+                        });
+                    });
+                }
+
+                addRelBtn.addEventListener("click", () => {
+                    edittIndex = null;
+                    relTitle.textContent = "Yeni Yakın Ekle";
+                    relNameEl.value = relPhoneEl.value = "";
+                    relModal.classList.remove("hidden");
+                });
+                cancelRelBtn.addEventListener("click", () =>
+                    relModal.classList.add("hidden")
+                );
+
+                saveRelBtn.addEventListener("click", () => {
+                    const name = relNameEl.value.trim();
+                    const phone = relPhoneEl.value.trim();
+                    if (!name || !phone) {
+                        return alert("Lütfen tüm alanları doldurun.");
+                    }
+                    if (edittIndex === null) {
+                        relatives.push({ name, phone });
+                    } else {
+                        relatives[edittIndex] = { name, phone };
+                    }
+                    localStorage.setItem(relKey, JSON.stringify(relatives));
+                    relModal.classList.add("hidden");
+                    renderRelatives();
+                });
+
+                renderRelatives();
+            })();
+        </script>
+    </body>
+</html>
